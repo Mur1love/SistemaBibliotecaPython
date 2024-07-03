@@ -1,21 +1,28 @@
+from cliente import *
+
 def main():
-    opcao = 0
-    while opcao != '6':
-        menu_principal()
-        opcao = input('--- Digite o número correspondente para selecionar: --- \n')
+    exibir_menu_principal()
+             
 
-
-
-
-
-def menu_principal():
+def exibir_menu_principal():
+    while True:
         print('--- SISTEMA DE BIBLIOTECA PYTHON  ---')
         print('# --- 1)  Clientes      --- #')
         print('# --- 2)  Livros        --- #')
         print('# --- 3)  Emprestimo    --- #')
         print('# --- 4)  Devolução     --- #')
         print('# --- 5)  Administrador --- #')
-        print('# --- 6)  Sair          --- #')
+        print('# --- 0)  Sair          --- #')
+        opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+
+        if opcao > 6 or opcao < 1:
+             print('Opção inválida. Digite uma opção entre 1 e 6.')
+        elif opcao == 0:
+            break
+        elif opcao == 1:
+             exibir_menu_cliente()
+        
+
 
 if __name__ == "__main__":
     main()
