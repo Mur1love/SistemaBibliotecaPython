@@ -15,13 +15,12 @@ def exibir_menu_principal():
         print('# --- 0)  Sair          --- #')
         opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
 
-        if opcao > 6 or opcao < 1:
-             print('Opção inválida. Digite uma opção entre 1 e 6.')
+        if opcao > 5 or opcao < 0:
+             print('Opção inválida. Digite uma opção entre 5 e 0.')
         elif opcao == 0:
             break
         elif opcao == 1:
-             exibir_menu_cliente()
-        
+            exibir_menu_cliente()
 
 
 if __name__ == "__main__":

@@ -1,7 +1,5 @@
 lista_clientes = []
 
-
-
 def exibir_menu_cliente():
     while True:
         print('---  SESSÃO CLIENTES  ---')
@@ -22,15 +20,18 @@ def exibir_menu_cliente():
 
 def cadastrar_cliente():
     print('---  CADASTRAR CLIENTE  ---')
-    dados_cliente = {}
+    dados_cliente = {}      
     nome = input('Digite o nome do Cliente: ')
     cpf = input('Digite o CPF do Cliente:')
     dados_cliente['nome'] = nome
     dados_cliente['cpf'] = cpf
+
 
     print("Dados do Cliente: ", dados_cliente)
     lista_clientes.append(dados_cliente)
 
 
 def listar_clientes():
+    if len(lista_clientes) == 0:
+        print("Nenhum Cliente Cadastrado")
     print(lista_clientes)
