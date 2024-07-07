@@ -18,6 +18,7 @@ def exibir_menu_principal():
         if opcao > 5 or opcao < 0:
              print('Opção inválida. Digite uma opção entre 5 e 0.')
         elif opcao == 0:
+            print('Saindo do sistema')
             break
         elif opcao == 1:
             exibir_menu_cliente()

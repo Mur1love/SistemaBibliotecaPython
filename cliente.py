@@ -14,6 +14,13 @@ def exibir_menu_cliente():
             break
         elif opcao == 1:
             cadastrar_cliente()
+           
+        elif opcao == 2: 
+            atualizar_cliente()
+        
+        elif opcao == 3:
+            remover_cliente()
+            
         elif opcao == 4:
             listar_clientes()
 
@@ -25,11 +32,17 @@ def cadastrar_cliente():
     cpf = input('Digite o CPF do Cliente:')
     dados_cliente['nome'] = nome
     dados_cliente['cpf'] = cpf
-
+    print('Novo cliente cadastratado com sucesso!')
 
     print("Dados do Cliente: ", dados_cliente)
     lista_clientes.append(dados_cliente)
 
+def atualizar_cliente():
+    
+    print('Cliente atualizado com sucesso!')
+
+def remover_cliente():
+    print('Cliente removido com sucesso!')
 
 def listar_clientes():
     if len(lista_clientes) == 0:
