@@ -27,10 +27,10 @@ def cadastrar_cliente():
     cpf = input('Digite o CPF do Cliente:')
     dados_cliente['nome'] = nome
     dados_cliente['cpf'] = cpf
+    print('Novo cliente cadastratado com sucesso!')
 
     print("Dados do Cliente: ", dados_cliente)
     lista_clientes.append(dados_cliente)
-
 
 def listar_clientes():
     if len(lista_clientes) == 0:
