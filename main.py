@@ -1,4 +1,5 @@
 from cliente import *
+from livros import*
 
 def main():
     exibir_menu_principal()
@@ -21,7 +22,8 @@ def exibir_menu_principal():
             break
         elif opcao == 1:
             exibir_menu_cliente()
-
+        elif opcao == 2:
+            menu_livros()
 
 if __name__ == "__main__":
     main()
