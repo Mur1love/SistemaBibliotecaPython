@@ -16,7 +16,7 @@ def exibir_menu_principal():
         opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
 
         if opcao > 5 or opcao < 0:
-            print('Opção inválida. Digite uma opção entre 0 e 5.')
+            print('Opção inválida. D1jigite uma opção entre 0 e 5.')
         elif opcao == 0:
             print('Saindo do sistema')
             break
