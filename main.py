@@ -1,7 +1,8 @@
 from cliente import *
 from livros import *
 from administrador import *
-
+from emprestimo import *
+from devolucao import *
 def main():
     exibir_menu_principal()
              
@@ -25,6 +26,11 @@ def exibir_menu_principal():
             exibir_menu_cliente()
         elif opcao == 2:
             menu_livros()
+        elif opcao == 3:
+            exibir_menu_emprestimo()
+        elif opcao == 4:
+            exibir_menu_devolucao()
+
         elif opcao == 5:
             exibir_menu_administrador()
 
