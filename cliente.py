@@ -30,6 +30,8 @@ def exibir_menu_cliente():
             break
         elif opcao == 1:
             cadastrar_cliente()
+        elif opcao == 2:
+            atualizar_cliente()    
         elif opcao == 3:
             remover_cliente()
         elif opcao == 4:
@@ -66,7 +68,25 @@ def listar_clientes():
             print(f'CPF:    {cliente["cpf"]}')
             print()
 
+def atualizar_cliente():
+    cpf = input('Digite o CPF do cliente que deseja atualizar (Digite um número para cancelar):')
+    if len(cpf) > 1: 
+        achou = False
+        for cliente in lista_clientes:
+            if cliente['cpf'] == cpf:
+                achou = True
+                nome = input(f'Atualize o nome do Cliente (atual: {cliente["nome"]}): ')
+                email = input(f'Atualize o email do Cliente (atual: {cliente["email"]}): ')
 
+                cliente['nome'] = nome
+                cliente['email'] = email
+                print('Informações atualizadas com sucesso!')
+                print(f'Nome: {cliente["nome"]}')
+                print(f'Gmail: {cliente["email"]}')
+        if achou == False:
+            print("CPF não encontrado, digite novamente!")
+            atualizar_cliente()
+    
 
 def remover_cliente():
     cpf = input('Digie o CPF do cliente para remove-lo:')
