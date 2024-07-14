@@ -3,6 +3,7 @@ from livros import *
 from administrador import *
 from emprestimo import *
 from devolucao import *
+
 def main():
     exibir_menu_principal()
              
@@ -25,14 +26,16 @@ def exibir_menu_principal():
         elif opcao == 1:
             exibir_menu_cliente()
         elif opcao == 2:
-            menu_livros()
+            exibir_menu_livros()
         elif opcao == 3:
             exibir_menu_emprestimo()
         elif opcao == 4:
             exibir_menu_devolucao()
-
         elif opcao == 5:
-            exibir_menu_administrador()
+            if autenticacao() == True:
+                exibir_menu_administrador()
+            else:
+                print("Credenciais Incorretas. Tente novamente.")
 
 
 

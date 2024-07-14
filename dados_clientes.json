@@ -1,17 +1,17 @@
 [
     {
-        "nome": "Murilo ",
+        "nome": "Murilo",
         "email": "murilo@gmail.com",
         "cpf": "1234"
     },
     {
-        "nome": "Davi",
-        "email": "Davi@gmail",
+        "nome": "David",
+        "email": "david@gmail.com",
         "cpf": "4312"
     },
     {
         "nome": "Ana",
-        "email": "ana@",
-        "cpf": "567"
+        "email": "ana@gmail.com",
+        "cpf": "5678"
     }
 ]

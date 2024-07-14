@@ -26,7 +26,7 @@ def exibir_menu_cliente():
 
         if opcao == 0:
             salvar_clientes(lista_clientes)
-            print('Saindo... Todas as alterações salvas!')
+            print('Voltando... Todas as alterações salvas!')
             break
         elif opcao == 1:
             cadastrar_cliente()
@@ -36,6 +36,8 @@ def exibir_menu_cliente():
             remover_cliente()
         elif opcao == 4:
             listar_clientes()
+        elif opcao == 5:
+            buscar_clientes()
 
 
 def cadastrar_cliente():
@@ -43,7 +45,7 @@ def cadastrar_cliente():
     dados_cliente = {}      
     nome = input('Digite o nome do Cliente: ')
     email = input('Digite o email do Cliente: ')
-    cpf = input('Digite o CPF do Cliente:')
+    cpf = input('Digite o CPF do Cliente: ')
     dados_cliente['nome'] = nome
     dados_cliente['email'] = email
     dados_cliente['cpf'] = cpf
@@ -68,6 +70,24 @@ def listar_clientes():
             print(f'CPF:    {cliente["cpf"]}')
             print()
 
+def buscar_clientes():
+    nome_busca = input('Digite o nome do cliente que deseja buscar: ').lower()
+    resultados = []
+    
+    for cliente in lista_clientes:
+        if nome_busca in cliente['nome'].lower():
+            resultados.append(cliente)
+    
+    if resultados:
+        for cliente in resultados:
+            print('---------------------------')
+            print(f'Nome:   {cliente["nome"]}')
+            print(f'E-mail: {cliente["email"]}')
+            print(f'CPF:    {cliente["cpf"]}')
+            print()
+    else:
+        print("Nenhum cliente encontrado com esse nome!")
+
 def atualizar_cliente():
     cpf = input('Digite o CPF do cliente que deseja atualizar (Digite um número para cancelar):')
     if len(cpf) > 1: 
@@ -82,7 +102,7 @@ def atualizar_cliente():
                 cliente['email'] = email
                 print('Informações atualizadas com sucesso!')
                 print(f'Nome: {cliente["nome"]}')
-                print(f'Gmail: {cliente["email"]}')
+                print(f'E-Mail: {cliente["email"]}')
         if achou == False:
             print("CPF não encontrado, digite novamente!")
             atualizar_cliente()

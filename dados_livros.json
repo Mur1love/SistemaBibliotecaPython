@@ -1,0 +1,42 @@
+[
+    {
+        "titulo": "Python",
+        "autor": "Jo\u00e3o Python",
+        "isbn": "1234"
+    },
+    {
+        "titulo": "Python 2",
+        "autor": "Jo\u00e3o Python",
+        "isbn": "5432"
+    },
+    {
+        "titulo": "Java",
+        "autor": "Ana Java",
+        "isbn": "8765"
+    },
+    {
+        "titulo": "Java 2",
+        "autor": "Ana Java",
+        "isbn": "7890"
+    },
+    {
+        "titulo": "Matematica",
+        "autor": "Marcos Matica",
+        "isbn": "1111"
+    },
+    {
+        "titulo": "Matematica 2",
+        "autor": "Marcos Matica",
+        "isbn": "2222"
+    },
+    {
+        "titulo": "Ingles",
+        "autor": "John Ingles",
+        "isbn": "3333"
+    },
+    {
+        "titulo": "Ingles 2",
+        "autor": "John Ingles",
+        "isbn": "4444"
+    }
+]
