@@ -22,8 +22,9 @@ def menu_livros():
             listar_livros()
 
 
-def cadastrar_livros():
-    print('---  CADASTRAR LIVROS  ---')
+def cadastrar_livros(): 
+    
+    print('---  CADASTRAR LIVROS---')
     dados_livros = {}      
     nome_do_livro = input('Digite o nome do livro:')
     autor = input('Digite o nome do autor: ')
@@ -48,7 +49,7 @@ def remover_livro():
     for livro in lista_livros:
         if livro['ISBN'] == isbn:
             lista_livros.remove(livro)
-            print(f'O {livro['nome_do_livro']} foi removido com sucesso. ')
+            print(f'O {livro["nome_do_livro"]} foi removido com sucesso. ')
         else:
             print('Livro não existe!')
 

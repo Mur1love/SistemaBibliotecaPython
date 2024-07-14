@@ -61,9 +61,9 @@ def listar_clientes():
     else:
         for cliente in lista_clientes:
             print('---------------------------')
-            print(f'Nome:   {cliente['nome']}')
-            print(f'E-mail: {cliente['email']}')
-            print(f'CPF:    {cliente['cpf']}')
+            print(f'Nome:   {cliente["nome"]}')
+            print(f'E-mail: {cliente["email"]}')
+            print(f'CPF:    {cliente["cpf"]}')
             print()
 
 
@@ -73,7 +73,7 @@ def remover_cliente():
     for cliente in lista_clientes:
         if cliente['cpf'] == cpf:
             lista_clientes.remove(cliente)
-            print(f'O {cliente['nome']} foi removido com sucesso. ')
+            print(f'O {cliente["nome"]} foi removido com sucesso. ')
         else:
             print('Cliente não existe!')
 
