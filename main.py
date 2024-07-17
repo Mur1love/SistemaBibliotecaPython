@@ -38,8 +38,5 @@ def exibir_menu_principal():
                 print("Credenciais Incorretas. Tente novamente.")
 
 
-
-    
-
 if __name__ == "__main__":
     main()

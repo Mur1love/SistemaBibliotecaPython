@@ -40,45 +40,38 @@ def exibir_menu_emprestimo():
 def cadastrar_emprestimo():
     clientes = ler_clientes()
     livros = ler_livros()
-    
+
     if not clientes:
         print("Nenhum cliente cadastrado. Cadastre clientes antes de fazer um empréstimo.")
-    
+
     if not livros:
         print("Nenhum livro cadastrado. Cadastre livros antes de fazer um empréstimo.")
 
     print('--- CADASTRAR EMPRÉSTIMO ---')
     cliente_existente = False
-    while not cliente_existente:
+    while cliente_existente == False:
         nome_cliente = input('Digite o nome do cliente (ou "sair" para cancelar): ')
         if nome_cliente.lower() == "sair":
             print("Cadastro de empréstimo cancelado.")
-            return
 
         for cliente in clientes:
             if cliente['nome'].lower() == nome_cliente.lower():
                 cliente_existente = True
                 break
-        if not cliente_existente:
+        if cliente_existente == False:
             print("Cliente não encontrado. Tente novamente.")
-        else:
-            for emprestimo in lista_emprestimos:
-                if emprestimo['cliente'].lower() == nome_cliente.lower():
-                    print("Cliente já possui um livro emprestado. Digite outro nome ou 'sair' para cancelar.")
-                    cliente_existente = False
 
     livro_existente = False
-    while not livro_existente:
+    while livro_existente == False:
         titulo_livro = input('Digite o título do livro (ou "sair" para cancelar): ')
         if titulo_livro.lower() == "sair":
             print("Cadastro de empréstimo cancelado.")
-            return
 
         for livro in livros:
             if livro['titulo'].lower() == titulo_livro.lower():
                 livro_existente = True
                 break
-        if not livro_existente:
+        if livro_existente == False:
             print("Livro não encontrado. Tente novamente.")
         else:
             for emprestimo in lista_emprestimos:
@@ -86,6 +79,7 @@ def cadastrar_emprestimo():
                     print("Livro já está emprestado. Digite outro título ou 'sair' para cancelar.")
                     livro_existente = False
 
+    #Definir máximo e minimo de dias
     dias_emprestimo = int(input('Digite a quantidade de dias de empréstimo: '))
 
     novo_emprestimo = {}
@@ -115,6 +109,3 @@ def salvar_emprestimos(lista_emprestimos):
     with open('dados_emprestimos.json', 'w') as file:
         json.dump(lista_emprestimos, file, indent=4)
 
-# Chamar a função de menu para iniciar o programa
-if __name__ == "__main__":
-    exibir_menu_emprestimo()
