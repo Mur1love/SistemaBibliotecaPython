@@ -1,14 +1,1 @@
-[
-    {
-        "cliente": "David",
-        "livro": "Python",
-        "data_emprestimo": "16/07/2024",
-        "data_devolucao": "23/07/2024"
-    },
-    {
-        "cliente": "Ana",
-        "livro": "python 2",
-        "data_emprestimo": "16/07/2024",
-        "data_devolucao": "26/07/2024"
-    }
-]
+[]

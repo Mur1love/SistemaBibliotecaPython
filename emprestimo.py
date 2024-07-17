@@ -82,6 +82,8 @@ def cadastrar_emprestimo():
     #Definir máximo e minimo de dias
     dias_emprestimo = int(input('Digite a quantidade de dias de empréstimo: '))
 
+    devolvido = False
+
     novo_emprestimo = {}
     data_emprestimo = datetime.now()
     data_devolucao = data_emprestimo + timedelta(days=dias_emprestimo)
@@ -89,6 +91,7 @@ def cadastrar_emprestimo():
     novo_emprestimo["livro"] = titulo_livro
     novo_emprestimo["data_emprestimo"] = data_emprestimo.strftime('%d/%m/%Y')
     novo_emprestimo["data_devolucao"] = data_devolucao.strftime('%d/%m/%Y')
+    novo_emprestimo["devolvido"] = devolvido
 
     lista_emprestimos.append(novo_emprestimo)
     print('Empréstimo cadastrado com sucesso!')
@@ -103,6 +106,7 @@ def listar_emprestimos():
             print(f'Livro:           {emprestimo["livro"]}')
             print(f'Data Empréstimo: {emprestimo["data_emprestimo"]}')
             print(f'Data Devolução:  {emprestimo["data_devolucao"]}')
+            print(f'Data Devolução:  {emprestimo["devolvido"]}')
             print()
 
 def salvar_emprestimos(lista_emprestimos):
