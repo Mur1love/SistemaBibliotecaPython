@@ -79,8 +79,7 @@ def cadastrar_emprestimo():
                     print("Livro já está emprestado. Digite outro título ou 'sair' para cancelar.")
                     livro_existente = False
 
-    #Definir máximo e minimo de dias
-    dias_emprestimo = int(input('Digite a quantidade de dias de empréstimo: '))
+    dias_emprestimo = 7
 
     novo_emprestimo = {}
     data_emprestimo = datetime.now()

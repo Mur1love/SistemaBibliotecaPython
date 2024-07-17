@@ -10,5 +10,11 @@
         "livro": "python 2",
         "data_emprestimo": "16/07/2024",
         "data_devolucao": "26/07/2024"
+    },
+    {
+        "cliente": "David",
+        "livro": "Java",
+        "data_emprestimo": "17/07/2024",
+        "data_devolucao": "24/07/2024"
     }
 ]
