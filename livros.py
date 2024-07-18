@@ -48,12 +48,13 @@ def cadastrar_livros():
     dados_livro['titulo'] = titulo
     dados_livro['autor'] = autor
     dados_livro['isbn'] = isbn
+    dados_livro['emprestado'] = False
     print('Novo livro cadastratado com sucesso!')
     
     print("Os dados do livro: ")
-    print('Título:  ', titulo)
-    print('Autor: ', autor)
-    print('ISBN:   ', isbn)
+    print('Título:  ',titulo)
+    print('Autor:   ',autor)
+    print('ISBN:    ',isbn)
     lista_livros.append(dados_livro)
     print('Foram salvos com sucesso! Salve para confirmar cadastro.')
 
@@ -65,6 +66,10 @@ def listar_livros():
             print(f'Título:   {livro["titulo"]}')
             print(f'Autor:    {livro["autor"]}')
             print(f'ISBN:     {livro["isbn"]}')
+            if livro['emprestado'] == False:
+                print("Status:     Disponível")
+            else:
+                print("Status:     Emprestado")
             print()
 
 def buscar_livros():

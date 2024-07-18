@@ -2,41 +2,49 @@
     {
         "titulo": "Python",
         "autor": "Jo\u00e3o Python",
-        "isbn": "1234"
+        "isbn": "1234",
+        "emprestado": true
     },
     {
         "titulo": "Python 2",
         "autor": "Jo\u00e3o Python",
-        "isbn": "5432"
+        "isbn": "5432",
+        "emprestado": false
     },
     {
         "titulo": "Java",
         "autor": "Ana Java",
-        "isbn": "8765"
+        "isbn": "8765",
+        "emprestado": false
     },
     {
         "titulo": "Java 2",
         "autor": "Ana Java",
-        "isbn": "7890"
+        "isbn": "7890",
+        "emprestado": false
     },
     {
         "titulo": "Matematica",
         "autor": "Marcos Matica",
-        "isbn": "1111"
+        "isbn": "1111",
+        "emprestado": false
     },
     {
         "titulo": "Matematica 2",
         "autor": "Marcos Matica",
-        "isbn": "2222"
+        "isbn": "2222",
+        "emprestado": false
     },
     {
         "titulo": "Ingles",
         "autor": "John Ingles",
-        "isbn": "3333"
+        "isbn": "3333",
+        "emprestado": false
     },
     {
         "titulo": "Ingles 2",
         "autor": "John Ingles",
-        "isbn": "4444"
+        "isbn": "4444",
+        "emprestado": false
     }
 ]

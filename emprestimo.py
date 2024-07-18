@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timedelta
 from cliente import ler_clientes
-from livros import ler_livros
+from livros import ler_livros, salvar_livros
 
 lista_emprestimos = []
 
@@ -16,7 +16,12 @@ def ler_emprestimos():
 
 ler_clientes()
 
-ler_livros()
+livros = ler_livros()
+
+def atualizar_status_livro(titulo_livro, status_emprestimo):
+    for livro in livros:
+        if livro['titulo'].lower() == titulo_livro.lower():
+            livro['emprestado'] = status_emprestimo
 
 lista_emprestimos = ler_emprestimos()
 
@@ -30,6 +35,7 @@ def exibir_menu_emprestimo():
 
         if opcao == 0:
             salvar_emprestimos(lista_emprestimos)
+            salvar_livros(livros)
             print('Voltando... Todas as alterações salvas!')
             break
         elif opcao == 1:
@@ -74,8 +80,8 @@ def cadastrar_emprestimo():
         if livro_existente == False:
             print("Livro não encontrado. Tente novamente.")
         else:
-            for emprestimo in lista_emprestimos:
-                if emprestimo['livro'].lower() == titulo_livro.lower():
+            for livro in livros:
+                if livro['titulo'].lower() == titulo_livro.lower() and livro['emprestado'] == True: 
                     print("Livro já está emprestado. Digite outro título ou 'sair' para cancelar.")
                     livro_existente = False
 
@@ -92,23 +98,34 @@ def cadastrar_emprestimo():
     novo_emprestimo["data_devolucao"] = data_devolucao.strftime('%d/%m/%Y')
     novo_emprestimo["devolvido"] = devolvido
 
+    atualizar_status_livro(titulo_livro, True)
+
+    print(f"Cliente:    {novo_emprestimo['cliente']}")
+    print(f"Livro:      {novo_emprestimo['livro']}")
+    print(f"Emprestimo: {novo_emprestimo['data_emprestimo']}")
+    print(f"Devolução:  {novo_emprestimo['data_devolucao']}")
+
     lista_emprestimos.append(novo_emprestimo)
     print('Empréstimo cadastrado com sucesso!')
 
 def listar_emprestimos():
-    if len(lista_emprestimos) == 0:
-        print("Nenhum empréstimo cadastrado")
+    lista_emprestados = []
+    for emprestimo in lista_emprestimos:
+        if emprestimo['devolvido'] == False:
+            lista_emprestados.append(emprestimo)
+
+    if len(lista_emprestados) == 0:
+        print("Nenhum empréstimo em andamento.")
     else:
-        for emprestimo in lista_emprestimos:
+        for emprestimo in lista_emprestados:
             print('---------------------------')
             print(f'Cliente:         {emprestimo["cliente"]}')
             print(f'Livro:           {emprestimo["livro"]}')
             print(f'Data Empréstimo: {emprestimo["data_emprestimo"]}')
             print(f'Data Devolução:  {emprestimo["data_devolucao"]}')
-            print(f'Data Devolução:  {emprestimo["devolvido"]}')
+            print(f'Status:          Emprestado')
             print()
 
 def salvar_emprestimos(lista_emprestimos):
     with open('dados_emprestimos.json', 'w') as file:
         json.dump(lista_emprestimos, file, indent=4)
-
