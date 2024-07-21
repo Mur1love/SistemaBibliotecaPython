@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "cliente": "Davi",
+        "livro": "Ingles",
+        "data_emprestimo": "21/07/2024",
+        "data_devolucao": "28/07/2024",
+        "devolvido": false
+    }
+]
