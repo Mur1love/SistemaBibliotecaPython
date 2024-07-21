@@ -31,7 +31,11 @@ def exibir_menu_emprestimo():
         print('# --- 1)  Cadastrar Empréstimo --- #')
         print('# --- 2)  Listar Empréstimos   --- #')
         print('# --- 0)  Voltar e Salvar      --- #')
-        opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+        try:
+            opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+        except ValueError:
+            print('Opção inválida. Digite um número entre 0 e 2.')
+            continue
 
         if opcao == 0:
             salvar_emprestimos(lista_emprestimos)
@@ -42,6 +46,8 @@ def exibir_menu_emprestimo():
             cadastrar_emprestimo()
         elif opcao == 2:
             listar_emprestimos()
+        else:
+            print('Opção inválida. Digite um número entre 0 e 2.')
 
 def cadastrar_emprestimo():
     clientes = ler_clientes()
@@ -59,6 +65,7 @@ def cadastrar_emprestimo():
         nome_cliente = input('Digite o nome do cliente (ou "sair" para cancelar): ')
         if nome_cliente.lower() == "sair":
             print("Cadastro de empréstimo cancelado.")
+            return
 
         for cliente in clientes:
             if cliente['nome'].lower() == nome_cliente.lower():
@@ -72,6 +79,7 @@ def cadastrar_emprestimo():
         titulo_livro = input('Digite o título do livro (ou "sair" para cancelar): ')
         if titulo_livro.lower() == "sair":
             print("Cadastro de empréstimo cancelado.")
+            return
 
         for livro in livros:
             if livro['titulo'].lower() == titulo_livro.lower():
@@ -84,19 +92,18 @@ def cadastrar_emprestimo():
                 if livro['titulo'].lower() == titulo_livro.lower() and livro['emprestado'] == True: 
                     print("Livro já está emprestado. Digite outro título ou 'sair' para cancelar.")
                     livro_existente = False
+    
 
-    dias_emprestimo = 7
-
-    devolvido = False
 
     novo_emprestimo = {}
+    dias_emprestimo = 7
     data_emprestimo = datetime.now()
     data_devolucao = data_emprestimo + timedelta(days=dias_emprestimo)
     novo_emprestimo["cliente"] = nome_cliente
     novo_emprestimo["livro"] = titulo_livro
     novo_emprestimo["data_emprestimo"] = data_emprestimo.strftime('%d/%m/%Y')
     novo_emprestimo["data_devolucao"] = data_devolucao.strftime('%d/%m/%Y')
-    novo_emprestimo["devolvido"] = devolvido
+    novo_emprestimo["devolvido"] = False
 
     atualizar_status_livro(titulo_livro, True)
 
@@ -109,9 +116,20 @@ def cadastrar_emprestimo():
     print('Empréstimo cadastrado com sucesso!')
 
 def listar_emprestimos():
+    livros = ler_livros()
     lista_emprestados = []
+    lista_emprestimos = ler_emprestimos()
+
     for emprestimo in lista_emprestimos:
-        if emprestimo['devolvido'] == False:
+        livro_correspondente = {}
+        encontrou = False
+        for livro in livros:
+            if livro['titulo'].lower() == emprestimo['livro'].lower():
+                livro_correspondente = livro
+                encontrou = True
+                break
+        
+        if encontrou == True and livro_correspondente['emprestado'] == True:
             lista_emprestados.append(emprestimo)
 
     if len(lista_emprestados) == 0:

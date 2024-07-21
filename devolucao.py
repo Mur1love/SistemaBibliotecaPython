@@ -1,81 +1,127 @@
 import json
-from cliente import ler_clientes
+from datetime import datetime
 from livros import ler_livros, salvar_livros
 from emprestimo import ler_emprestimos
 
-ler_clientes()
-ler_emprestimos()
+def ler_devolucoes():
+    lista_devolucoes = []
+    try:
+        with open('dados_devolucao.json', 'r') as file:
+            lista_devolucoes = json.load(file)
+        return lista_devolucoes
+    except FileNotFoundError:
+        print("Arquivo de devoluções ainda não existe!")
+        return []
+
 livros = ler_livros()
 
 def atualizar_status_livro(titulo_livro, status_emprestimo):
     for livro in livros:
         if livro['titulo'].lower() == titulo_livro.lower():
             livro['emprestado'] = status_emprestimo
+    salvar_livros(livros)
 
-lista_emprestimos = ler_emprestimos()
+lista_devolucoes = ler_devolucoes()
 
 def exibir_menu_devolucao():
-    
     while True:
-        print('---  SESSÃO DEVOLUÇÃO  ---')
-        print('# --- 1)  Realizar Devolução    --- #')
-        print('# --- 2)  Devoluções Realizadas --- #')
-        print('# --- 0)  Voltar e Salvar       --- #')
-        opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))  
+        print('---  SESSÃO DEVOLUÇÕES  ---')
+        print('# --- 1)  Registrar Devolução --- #')
+        print('# --- 2)  Listar Devoluções   --- #')
+        print('# --- 0)  Salvar e Sair       --- #')
+        try:
+            opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+        except ValueError:
+            print('Opção inválida. Digite um número entre 0 e 2.')
+            continue
 
-        if opcao == 1:
-            realizar_devolucao() 
-        elif opcao == 2:
-            listar_devolucoes()
-        elif opcao == 0:
-            salvar_emprestimos(lista_emprestimos)
+        if opcao == 0:
+            salvar_devolucao(lista_devolucoes)
             salvar_livros(livros)
             print('Voltando... Todas as alterações salvas!')
             break
+        elif opcao == 1:
+            registrar_devolucao()
+        elif opcao == 2:
+            listar_devolucoes()
+        else:
+            print('Opção inválida. Digite um número entre 0 e 2.')
 
+def registrar_devolucao():
+    lista_emprestimos = ler_emprestimos()
+    livros = ler_livros()
 
-def realizar_devolucao():
-    print('---  REALIZAR DEVOLUÇÃO  ---')
-    nome_cliente = input('Digite o nome do cliente: ')
-    titulo_livro = input('Digite o título do livro: ')
+    if not lista_emprestimos:
+        print("Nenhum empréstimo cadastrado.")
 
-    emprestimo_encontrado = False
+    print('--- REGISTRAR DEVOLUÇÃO ---')                            
+    cliente_existente = False
+    while cliente_existente == False:
+        nome_cliente = input('Digite o nome do cliente (ou "sair" para cancelar): ')
+        if nome_cliente.lower() == "sair":
+            print("Registro de devolução cancelado.")
+            return
 
-    for emprestimo in lista_emprestimos:
-        if emprestimo['cliente'].lower() == nome_cliente.lower() and emprestimo['livro'].lower() == titulo_livro.lower():
-            emprestimo_encontrado = True
-            if emprestimo['devolvido'] == True:
-                print('Este livro já foi devolvido.')
-            else:
-                emprestimo['devolvido'] = True
-                atualizar_status_livro(titulo_livro, False)
-                print('Devolução realizada com sucesso!')
+        for emprestimo in lista_emprestimos:
+            if emprestimo['cliente'].lower() == nome_cliente.lower() and not emprestimo['devolvido']:
+                cliente_existente = True
+                break
+        if cliente_existente == False:
+            print("Cliente não encontrado ou não possui empréstimos pendentes. Tente novamente.")
 
-    if emprestimo_encontrado == False:
-        print('Empréstimo não encontrado. Verifique o nome do cliente e o título do livro.')
+    livro_existente = False
+    while not livro_existente:
+        titulo_livro = input('Digite o título do livro (ou "sair" para cancelar): ')
+        if titulo_livro.lower() == "sair":
+            print("Registro de devolução cancelado.")
+            return
+        
+        
+
+        livro_encontrado = False
+
+        for emprestimo in lista_emprestimos:
+            if emprestimo['livro'].lower() == titulo_livro.lower() and not emprestimo['devolvido']:
+                for livro in livros:
+                    if livro['titulo'].lower() == titulo_livro.lower() and livro['emprestado']:
+                        livro_encontrado = True
+                        break
+                if livro_encontrado:
+                    livro_existente = True
+                    break
+        if not livro_existente:
+            print("Livro não encontrado, não foi emprestado, ou já devolvido. Tente novamente.")
+
+    nova_devolucao = {}
+    nova_devolucao['cliente'] = nome_cliente
+    nova_devolucao['livro'] = titulo_livro
+    nova_devolucao['data_emprestimo'] = emprestimo['data_emprestimo']
+    nova_devolucao['data_devolucao'] = datetime.now().strftime('%d/%m/%Y')
+    nova_devolucao['devolvido'] = True
+
+    atualizar_status_livro(titulo_livro, False)
+
+    print(f"Cliente:    {nova_devolucao['cliente']}")
+    print(f"Livro:      {nova_devolucao['livro']}")
+    print(f"Empréstimo: {nova_devolucao['data_emprestimo']}")
+    print(f"Devolução:  {nova_devolucao['data_devolucao']}")
+
+    lista_devolucoes.append(nova_devolucao)
+    print('Devolução registrada com sucesso!')
 
 def listar_devolucoes():
-    print('---  DEVOLUÇÕES REALIZADAS  ---')
-    devolucoes_realizadas = []
-    for emprestimo in lista_emprestimos:
-        if emprestimo['devolvido'] == True:
-            devolucoes_realizadas.append(emprestimo)
-
-    if len(devolucoes_realizadas) == 0:
-        print('Nenhuma devolução realizada.')
+    if len(lista_devolucoes) == 0:
+        print("Nenhuma devolução realizada")
     else:
-        for devolucao in devolucoes_realizadas:
-            print('---------------------------')
-            print(f'Cliente:         {devolucao["cliente"]}')
-            print(f'Livro:           {devolucao["livro"]}')
-            print(f'Data Empréstimo: {devolucao["data_emprestimo"]}')
-            print(f'Data Devolução:  {devolucao["data_devolucao"]}')
-            if devolucao['devolvido'] == True:
-                print(f'Status:          Devolvido')
-            else:
-                print(f'Status:          Emprestado')
+        for devolucao in lista_devolucoes:
+            print('-------------------------')
+            print(f'Nome:            {devolucao['cliente']}')
+            print(f'Livro:           {devolucao['livro']}')
+            print(f'Data Emprestimo: {devolucao['data_emprestimo']}')
+            print(f'Data Devolucao:  {datetime.now().strftime('%d/%m/%Y')}')
+            print(f'Status:          {'Devolvido'}')
             print()
 
-def salvar_emprestimos(lista_emprestimos):
-    with open('dados_emprestimos.json', 'w') as file:
-        json.dump(lista_emprestimos, file, indent=4)
+def salvar_devolucao(lista_devolucao):
+    with open('dados_devolucao.json', 'w') as file:
+        json.dump(lista_devolucao, file, indent=4)

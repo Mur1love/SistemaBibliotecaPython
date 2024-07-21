@@ -1,11 +1,13 @@
 from cliente import ler_clientes
 from livros import ler_livros
 from emprestimo import ler_emprestimos
+from devolucao import ler_devolucoes
 
 
 lista_clietes = ler_clientes()
 lista_livros = ler_livros()
 lista_emprestimos = ler_emprestimos()
+lista_devolucoes = ler_devolucoes()
 
 
 def autenticacao():
@@ -32,9 +34,13 @@ def exibir_menu_administrador():
         print('# --- 3)  Número de Livros Disponíveis    --- #')
         print('# --- 4)  Número de Livros Emprestados    --- #')
         print('# --- 5)  Número de Clientes Cadastrados  --- #')
-        print('# --- 6)  Empréstimos Realizados          --- #')
+        print('# --- 6)  Número de Devoluções            --- #')
         print('# --- 0)  Voltar                          --- #')
-        opcao = int(input('--- Digite o número correspondente para selecionar: --- \n')) 
+        try:
+            opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+        except ValueError:
+            print('Opção inválida. Digite um número entre 0 e 6.')
+            continue
 
         if opcao == 1:
             exibir_relatorio()
@@ -82,12 +88,7 @@ def qtd_livros_emprestados():
     return len(livros_emprestados)
 
 def qtd_devolucoes():
-    devolucoes = []
-    for emprestimo in lista_emprestimos:
-        if emprestimo['devolvido'] == True:
-            devolucoes.append(emprestimo)
-
-    return len(devolucoes)
+    return len(lista_devolucoes)
         
 
 def exibir_relatorio():

@@ -22,7 +22,11 @@ def exibir_menu_cliente():
         print('# --- 4)  Listar Clientes    --- #')
         print('# --- 5)  Buscar Clientes    --- #')
         print('# --- 0)  Voltar e Salvar    --- #')
-        opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))    
+        try:
+            opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+        except ValueError:
+            print('Opção inválida. Digite um número entre 0 e 5.')
+            continue 
 
         if opcao == 0:
             salvar_clientes(lista_clientes)

@@ -3,7 +3,7 @@
         "titulo": "Python",
         "autor": "Jo\u00e3o Python",
         "isbn": "1234",
-        "emprestado": true
+        "emprestado": false
     },
     {
         "titulo": "Python 2",

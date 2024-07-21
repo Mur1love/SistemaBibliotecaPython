@@ -1,7 +1,8 @@
 import json
 
+lista_livros = []
+
 def ler_livros():
-    lista_livros = []
     try:
         with open('dados_livros.json', 'r') as file:
             lista_livros = json.load(file)
@@ -17,10 +18,14 @@ def exibir_menu_livros():
         print('# --- 1)  Cadastrar livro --- #')
         print('# --- 2)  Atualizar livro --- #')
         print('# --- 3)  Remover livro   --- #')
-        print('# --- 4)  Listar livro    --- #')
-        print('# --- 5)  Buscar livro    --- #')
+        print('# --- 4)  Listar livros   --- #')
+        print('# --- 5)  Buscar livros   --- #')
         print('# --- 0)  Voltar e Salvar --- #')
-        opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+        try:
+            opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+        except ValueError:
+            print('Opção inválida. Digite um número entre 0 e 5.')
+            continue
 
         if opcao == 0:
             salvar_livros(lista_livros)
@@ -67,14 +72,15 @@ def listar_livros():
             print(f'Autor:    {livro["autor"]}')
             print(f'ISBN:     {livro["isbn"]}')
             if livro['emprestado'] == False:
-                print("Status:     Disponível")
+                print("Status:   Disponível")
             else:
-                print("Status:     Emprestado")
+                print("Status:   Emprestado")
             print()
 
 def buscar_livros():
     titulo_busca = input('Digite o titulo do livro que deseja buscar: ').lower()
     resultados = []
+    
     
     for livro in lista_livros:
         if titulo_busca in livro['titulo'].lower():

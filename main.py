@@ -16,7 +16,12 @@ def exibir_menu_principal():
         print('# --- 4)  Devolução     --- #')
         print('# --- 5)  Administrador --- #')
         print('# --- 0)  Sair          --- #')
-        opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+
+        try:
+            opcao = int(input('--- Digite o número correspondente para selecionar: --- \n'))
+        except ValueError:
+            print('Opção inválida. Digite um número entre 0 e 5.')
+            continue
 
         if opcao > 5 or opcao < 0:
             print('Opção inválida. D1jigite uma opção entre 0 e 5.')
