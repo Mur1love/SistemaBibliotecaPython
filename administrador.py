@@ -88,6 +88,7 @@ def qtd_livros_emprestados():
     return len(livros_emprestados)
 
 def qtd_devolucoes():
+    lista_devolucoes = ler_devolucoes()
     return len(lista_devolucoes)
         
 

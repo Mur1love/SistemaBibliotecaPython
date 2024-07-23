@@ -1,7 +1,5 @@
 import json
 
-lista_livros = []
-
 def ler_livros():
     try:
         with open('dados_livros.json', 'r') as file:
@@ -10,9 +8,8 @@ def ler_livros():
     except FileNotFoundError:
         print("Arquivo de livros ainda não existe!")
 
-lista_livros = ler_livros()
-
 def exibir_menu_livros():
+    lista_livros = ler_livros()
     while True:
         print('---  SESSÃO LIVROS  ---')
         print('# --- 1)  Cadastrar livro --- #')
@@ -44,7 +41,7 @@ def exibir_menu_livros():
 
 
 def cadastrar_livros(): 
-    
+    lista_livros = ler_livros()
     print('--- CADASTRAR LIVROS ---')
     dados_livro = {}      
     titulo = input('Digite o nome do livro: ')
@@ -64,6 +61,7 @@ def cadastrar_livros():
     print('Foram salvos com sucesso! Salve para confirmar cadastro.')
 
 def listar_livros():
+    lista_livros = ler_livros()
     if len(lista_livros) == 0:
         print("Nenhum livro cadastrado")
     for livro in lista_livros:
@@ -78,6 +76,7 @@ def listar_livros():
             print()
 
 def buscar_livros():
+    lista_livros = ler_livros()
     titulo_busca = input('Digite o titulo do livro que deseja buscar: ').lower()
     resultados = []
     
@@ -98,16 +97,20 @@ def buscar_livros():
 
 
 def remover_livro():
+    lista_livros = ler_livros()
     isbn = input('Digie o ISBN do livro para remove-lo:')
+    achou = False
     for livro in lista_livros:
         if livro['isbn'] == isbn:
             lista_livros.remove(livro)
+            achou = True
             print(f'O livro {livro["titulo"]} foi removido com sucesso. Salve para confirmar remoção.')
-        else:
-            print('Livro não existe!')
+    if achou == False:
+        print('Livro não existe!')
 
 
 def atualizar_livro():
+    lista_livros = ler_livros()
     isbn = input('Digite o ISBN do livro que deseja atualizar (Digite um número para cancelar):')
     if len(isbn) > 1: 
         achou = False
@@ -130,4 +133,6 @@ def atualizar_livro():
 def salvar_livros(lista_livros):
      with open('dados_livros.json', 'w') as file:
         json.dump(lista_livros, file, indent = 4)
+
+
 

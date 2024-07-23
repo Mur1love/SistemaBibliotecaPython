@@ -1,1 +1,23 @@
-[]
+[
+    {
+        "cliente": "Murilo",
+        "livro": "Python",
+        "data_emprestimo": "21/07/2024",
+        "data_devolucao": "28/07/2024",
+        "devolvido": false
+    },
+    {
+        "cliente": "Murilo",
+        "livro": "Ingles",
+        "data_emprestimo": "23/07/2024",
+        "data_devolucao": "30/07/2024",
+        "devolvido": false
+    },
+    {
+        "cliente": "Murilo",
+        "livro": "Ingles",
+        "data_emprestimo": "23/07/2024",
+        "data_devolucao": "30/07/2024",
+        "devolvido": false
+    }
+]
