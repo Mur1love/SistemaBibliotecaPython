@@ -1,9 +1,31 @@
 [
     {
+<<<<<<< HEAD
         "cliente": "Davi",
         "livro": "Ingles",
         "data_emprestimo": "21/07/2024",
         "data_devolucao": "28/07/2024",
         "devolvido": false
+=======
+        "cliente": "Murilo",
+        "livro": "Python",
+        "data_emprestimo": "21/07/2024",
+        "data_devolucao": "28/07/2024",
+        "devolvido": false
+    },
+    {
+        "cliente": "Murilo",
+        "livro": "Ingles",
+        "data_emprestimo": "23/07/2024",
+        "data_devolucao": "30/07/2024",
+        "devolvido": false
+    },
+    {
+        "cliente": "Murilo",
+        "livro": "Ingles",
+        "data_emprestimo": "23/07/2024",
+        "data_devolucao": "30/07/2024",
+        "devolvido": false
+>>>>>>> 0e6580d7a62ff0e917f5bac699a0e213808a5da3
     }
 ]
